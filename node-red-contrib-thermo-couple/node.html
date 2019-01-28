@@ -1,0 +1,86 @@
+<script type="text/x-red" data-template-name="thermo-couple">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="thermo-couple">
+    <p>Summary of the node.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+       <dt>payload<span class="property-type"></span></dt>
+       <dd>Connect the output of a modbus node to the input of the Mako ThermoCouple node. The modbus settings must look similar to the following example :
+</li>
+     <li>
+<b>Step One</b> FC 4 : Read Input Registers
+</li>
+     <li>
+<b>Step Two</b> Address 6 or 8
+</li>
+     <li>
+<b>Step Three</b> Quantity = 2
+</li>
+     <li>
+<b>Step Four</b> Poll Rate = you decide poll times ! .</dd>
+       <dt class="optional"><span class="property-type"></span></dt>
+       <dd></dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload<span class="property-type"></span></dt>
+        <dd>The payload is numeric value recieved from the Mako PLC. The value is the true sensor reading</dd>
+        <dt class="optional"><span class="property-type"></span></dt>
+        <dd>.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p>There are 2 x thermocouple inputs on the Mako. 
+</li>
+     <li>
+Input 1 is Modbus address 6 & 7.
+</li>
+     <li>         
+Input 2 is Modbus address 8 & 9.</p>
+</li>
+     
+To read input 1 you would use settings
+</li>
+     <li>
+<b>Step One</b> FC 4 : Read Input Registers
+</li>
+     <li>
+<b>Step Two</b> Address 6
+</li>
+     <li>
+<b>Step Three</b> Quantity = 2
+</li>
+     
+To use input 2 you would just change the address "6" to "8" , STEP 2.
+</li>
+     </p>
+Its best to use the "Modbus  Getter node" Using the Modbus Getter can give you control on how often you want to read the channel by injecting the input pin
+
+    <p>
+</li>
+     
+You can also use the Smithtek Sequencer node to automate round robbin polling of the ThermoCopuple. If you have devices deployed at long distances using the LoRa radio, staggering the poll rate will improve connectivity.
+<p>
+</li>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('thermo-couple',{
+        color:"#B9B6B8",
+        category: 'SMITHTEK MAKO',
+        defaults: {
+            name: {value:""},
+        },
+        inputs:1,
+        outputs: 1,
+        icon: "icon.png",
+        label: function() {
+            return this.name || 'thermo-couple';
+        }
+    });
+</script>

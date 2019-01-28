@@ -1,0 +1,84 @@
+<script type="text/x-red" data-template-name="analog-input">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-red:common.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-red:common.label.name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="analog-input">
+    <p>Summary of the node.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+       <dt>payload<span class="property-type"></span></dt>
+       <dd>Connect the output of a modbus read node or Modbus Getter node to the input of the Mako analog node. The modbus settings must look similar to the following example :
+</li>
+     <li>
+<b>Step One</b> FC 4 : Read Input Registers
+</li>
+     <li>
+<b>Step Two</b> Address between 0 - 65535
+</li>
+     <li>
+<b>Step Three</b> Quantity = 1
+</li>
+     <li>
+<b>Step Four</b> Poll Rate = you decide poll times ! .</dd>
+       <dt class="optional"><span class="property-type"></span></dt>
+       <dd></dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload<span class="property-type"></span></dt>
+        <dd>The payload is numeric value recieved from the Mako PLC. The value is the true sensor reading </dd>
+        <dt class="optional"><span class="property-type"></span></dt>
+        <dd>.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p>There are 4 x Analog inputs on the Mako. 
+</li>
+     <li>
+You can create as many virtual analog addresses in the Mako programming software, V Builder. 
+</li>
+     <li>         
+
+     
+To read input 1 you would use settings
+</li>
+     <li>
+<b>Step One</b> FC 4 : Read Input Registers
+</li>
+     <li>
+<b>Step Two</b> Address 0
+</li>
+     <li>
+<b>Step Three</b> Quantity = 1
+</li>
+     
+
+     </p>
+Its best to use the "Modbus  Getter node" Using the Modbus Getter can give you control on how often you want to read the channel by injecting the input pin. Also you can use the analog input node to read any modbus "Input register" or "Holding register" created in the Mako. this is good for reading setpoints, timers, counters,.
+
+    <p>
+</li>
+     
+You can also use the Smithtek Sequencer node to automate round robbin polling of the Analog Input. If you have devices deployed at long distances using the LoRa radio, staggering the poll rate will improve connectivity.
+<p>
+</li>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('analog-input',{
+        color:"#B9B6B8",
+        category: 'SMITHTEK MAKO',
+        defaults: {
+            name: {value:""},
+        },
+        inputs:1,
+        outputs: 1,
+        icon: "icon.png",
+        label: function() {
+            return this.name || 'analog-input';
+        }
+    });
+</script>

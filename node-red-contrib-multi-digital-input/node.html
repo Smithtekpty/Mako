@@ -1,0 +1,89 @@
+<script type="text/x-red" data-template-name="multi-digital-input">
+        <div class="form-row">
+        <label for="node-input-outputs"><i class="fa fa-random"></i> <span data-i18n="function.label.outputs" ></span>Number Of Channels</label>
+        <input id="node-input-outputs" style="width: 60px;" value="6">
+    </div>
+<div class="form-row">
+    
+</script>
+
+<script type="text/x-red" data-help-name="multi-digital-input">
+    <p>Summary of the node.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+       <dt>payload<span class="property-type"></span></dt>
+       <dd>Connect the output of a modbus read node or Modbus Getter node to the input of the Mako Multi-Digital-input node.
+</li>
+     <li>
+The modbus settings must look similar to the following example :
+</li>
+     <li>
+<b>Step One</b> FC 2 : Read Input Status
+</li>
+     <li>
+<b>Step Two</b> Address between 0 - 65535
+</li>
+     <li>
+<b>Step Three</b> Quantity between 0 - 6
+</li>
+     <li>
+<b>Step Four</b> Poll Rate = you decide poll times ! .</dd>
+       <dt class="optional"><span class="property-type"></span></dt>
+       <dd></dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload<span class="property-type"></span></dt>
+        <dd>The payload is "1" for input activated.
+
+     
+ <dd>The payload is "0" for input deactivated. </dd>
+        <dt class="optional"><span class="property-type"></span></dt>
+        <dd>.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p>There are 6 x Digital inputs on the Mako. 
+</li>
+
+<dd>You can create as many virtual digital Input addresses in the Mako programming software, V Builder as required.
+</li>
+     <li>         
+
+     
+<dd> When you deploy the Digital input module it will automatically activate 6 output pins. This by default means it is ready to read all 6 digital inputs on the Mako.
+<dd> You can select less output pins by changing "Number of Channels" in node properties.
+<dd> To read 6 channels you must configure the Modbus Getter Module.
+</li>
+     <li> 
+<b>Step Three</b> Quantity between 0 - 6
+<dd> Change the quantity in step 3 to the amount of inputs you wish to read. make sure the Digital input module "Number of Channels matches.
+     
+
+     </p>
+Its best to use the "Modbus  Getter node" Using the Modbus Getter can give you control on how often you want to read the channel by injecting the input pin. Also you can use the Multi-Digital-Input node to read any digital modbus "Input status"  created in the Mako. this is good for reading setpoints, timers, counters, 
+
+    <p>
+</li>
+     
+You can also use the Smithtek Sequencer node to automate round robbin polling of the Digital Inputs of the Mako. If you have devices deployed at long distances using the LoRa radio, staggering the poll rate will improve connectivity.
+<p>
+</li>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('multi-digital-input',{
+        color:"#B9B6B8",
+        category: 'SMITHTEK MAKO',
+        defaults: {
+            name: {value:""},
+            outputs: {value: "6"},
+        },
+        inputs:1,
+        outputs: 1,
+        icon: "icon.png",
+        label: function() {
+            return this.name || 'multi-digital-input';
+        }
+    });
+</script>
